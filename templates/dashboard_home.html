@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <h1>Dashboard</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <canvas id="resultChart"></canvas>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script src="/static/js/Chart.min.js"></script>
+<script>
+var ctx = $("#resultChart").get(0).getContext("2d");
+
+var data = {
+    labels: {{ date_list | safe }},
+    datasets: [
+        {
+            label: "Results",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: {{ result_list | safe }}
+        }
+    ]
+};
+
+var resultsLineChart = new Chart(ctx).Line(data, {
+  responsive: true,
+  scaleOverride: true,
+  scaleStartValue: 0,
+  scaleSteps: 10,
+  scaleStepWidth: 1
+});
+
+</script>
+
+{% endblock %}
