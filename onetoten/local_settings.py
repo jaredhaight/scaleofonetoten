@@ -14,7 +14,7 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = os.environ["OTT_STATIC_PATH"]
+STATIC_ROOT = os.environ["OTT_STATIC_ROOT"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["OTT_SECRET_KEY"]
