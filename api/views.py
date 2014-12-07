@@ -9,9 +9,14 @@ from profile.models import HayUser
 @twilio_view
 def sms(request):
     resp = Response()
-    from_number = request.POST["From"]
-    body = request.POST["Body"]
-
+    try:
+        from_number = request.POST["From"]
+    except:
+        from_number = None
+    try:
+        body = request.POST["Body"]
+    except:
+        body = None
     user = HayUser.objects.filter(from_number[1:]).first()
 
     if type(body) == int and user:
