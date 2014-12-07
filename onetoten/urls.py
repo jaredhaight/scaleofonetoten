@@ -11,8 +11,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'onetoten.views.home'),
     url(r'^register/', 'onetoten.views.register'),
-
-
+    url(r'^api/', include('api.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^profile/', include('profile.urls'))
 )

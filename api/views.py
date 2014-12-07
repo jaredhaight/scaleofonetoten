@@ -1,6 +1,4 @@
-
 from django.http import HttpResponse
-
 from django_twilio.decorators import twilio_view
 from twilio.twiml import Response
 from dashboard.models import Result
