@@ -12,7 +12,7 @@ def sms(request):
     from_number = request.POST["From"]
     body = request.POST["Body"]
     try:
-        user = HayUser.objects.filter(phone_number=from_number[1:]).first()
+        user = HayUser.objects.filter(phone_number=from_number[2:]).first()
     except:
         user = None
 
