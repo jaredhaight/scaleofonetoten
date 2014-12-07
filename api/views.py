@@ -8,12 +8,8 @@ from dashboard.models import Result
 @twilio_view
 def sms(request):
     resp = Response()
-    from_number = None
-    body = None
-    if request.POST.get("from"):
-        from_number = request.POST["from"]
-    if request.POST.get("body"):
-        body = request.POST["body"]
+    from_number = request.POST["From"]
+    body = request.POST["Body"]
     if from_number and body:
         resp.message("You said %s from %s" % (from_number, body))
     elif from_number:
