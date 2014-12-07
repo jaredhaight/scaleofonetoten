@@ -15,6 +15,8 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.environ["OTT_STATIC_ROOT"]
+TWILIO_ACCOUNT_SID = os.environ["TWILIO_ACCOUNT_SID"]
+TWILIO_AUTH_TOKEN = os.environ["TWILIO_AUTH_TOKEN"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["OTT_SECRET_KEY"]
