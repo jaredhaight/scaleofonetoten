@@ -17,7 +17,10 @@ def sms(request):
         body = request.POST["Body"]
     except:
         body = None
-    user = HayUser.objects.filter(from_number[1:]).first()
+    try:
+        user = HayUser.objects.filter(from_number[1:]).first()
+    except:
+        user = None
 
     if type(body) == int and user:
         result = Result(value=body, user=user, source=from_number)
