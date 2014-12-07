@@ -11,9 +11,9 @@ def sms(request):
     from_number = None
     body = None
     if request.POST.get("from"):
-        from_number = request.POST.get('from')
+        from_number = request.POST["from"]
     if request.POST.get("body"):
-        body = request.POST.get("body")
+        body = request.POST["body"]
     if from_number and body:
         resp.message("You said %s from %s" % (from_number, body))
     elif from_number:
