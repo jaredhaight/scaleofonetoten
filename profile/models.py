@@ -75,13 +75,12 @@ class HayUser(AbstractBaseUser, PermissionsMixin):
 
 class Notification(models.Model):
     type = models.CharField(max_length=10, choices=NOTIFICATION_CHOICES, default="text")
-    day_to_send = models.CharField(max_length=7, choices=DAY_CHOICES)
+    #day_to_send = models.CharField(max_length=7, choices=DAY_CHOICES)
     time_to_send = models.TimeField()
     user = models.OneToOneField(HayUser)
 
     def create_notification(self, type, days, time):
         self.type = type
-        self.day_to_send = days
         self.time_to_send = time
         self.save()
 
