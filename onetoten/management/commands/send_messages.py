@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from profile.models import Notification
-from datetime import datetime
+import datetime
 from onetoten.utils import send_text
 
 
