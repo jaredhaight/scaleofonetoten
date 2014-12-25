@@ -11,12 +11,7 @@ def log_message(message):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        log_message("Starting Send Message")
-        start_time = (datetime.datetime.now()+datetime.timedelta(minutes=-15)).time()
-        log_message("Start time: " + str(start_time))
-        end_time = (datetime.datetime.now()+datetime.timedelta(minutes=15)).time()
-        log_message("End time: " + str(end_time))
-        notifications = Notification.objects.filter(time_to_send__range=(start_time, end_time))
+        notifications = Notification.objects.filter(time_to_send__hour=datetime.datetime.now().hour)
         log_message("Notifications: " + str(notifications))
 
         for notification in notifications:
