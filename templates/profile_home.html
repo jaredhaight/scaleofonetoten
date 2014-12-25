@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load tz %}
+
+{% block content %}
+
+{% if result %}
+  <div class="alert alert-success" role="alert">
+    <p>{{ result }}</p>
+  </div>
+{% endif %}
+{% if user_form.non_field_errors %}
+  {{ user_form.non_field_errors }}
+{% endif %}
+{% if notification_form.non_field_errors %}
+  {{ notification_form.non_field_errors }}
+{% endif %}
+
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <h1>Profile</h1>
+  </div>
+</div>
+<div class="row">
+  {% localtime on %}
+  <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+    <form method="post" action="" class="form">
+      {% csrf_token %}
+      {% bootstrap_form user_form %}
+      {% bootstrap_form notification_form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      {% endbuttons %}
+    </form>
+  </div>
+  {%  endlocaltime %}
+</div>
+
+{% endblock %}

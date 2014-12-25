@@ -1,0 +1,38 @@
+from localflavor.us.forms import USPhoneNumberField
+from django.forms import fields
+from django.forms import ModelForm, ChoiceField
+from django.forms.util import from_current_timezone
+from django.forms.util import to_current_timezone
+from django.utils import timezone
+import pytz
+import datetime
+from profile.models import HayUser, Notification, NOTIFICATION_CHOICES
+
+
+class TzAwareTimeField(fields.TimeField):
+    def prepare_value(self, value):
+        if isinstance(value, datetime.datetime):
+            value = from_current_timezone(value).time()
+        return super(TzAwareTimeField, self).prepare_value(value)
+
+    def clean(self, value):
+        value = super(TzAwareTimeField, self).to_python(value)
+        dt = timezone.now()
+        return dt.replace(
+            hour=value.hour, minute=value.minute,
+            second=value.second, microsecond=value.microsecond)
+
+
+class HayUserForm(ModelForm):
+    phone_number = USPhoneNumberField(required=False)
+    class Meta:
+        model = HayUser
+        fields = ['email', 'phone_number', 'timezone']
+
+
+class NotificationForm(ModelForm):
+    type = ChoiceField(choices=NOTIFICATION_CHOICES, label="Type of Notification")
+    time_to_send = TzAwareTimeField()
+    class Meta:
+        model = Notification
+        fields = ['type', 'time_to_send']
