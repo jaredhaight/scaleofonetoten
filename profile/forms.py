@@ -12,15 +12,19 @@ from profile.models import HayUser, Notification, NOTIFICATION_CHOICES
 class TzAwareTimeField(fields.TimeField):
     def prepare_value(self, value):
         if isinstance(value, datetime.datetime):
-            value = from_current_timezone(value).time()
+            value = to_current_timezone(value).time()
         return super(TzAwareTimeField, self).prepare_value(value)
 
     def clean(self, value):
         value = super(TzAwareTimeField, self).to_python(value)
-        dt = timezone.now()
-        return dt.replace(
+        print value
+        dt = to_current_timezone(timezone.now())
+        print dt
+        new_time = dt.replace(
             hour=value.hour, minute=value.minute,
             second=value.second, microsecond=value.microsecond)
+        print from_current_timezone(new_time)
+        return from_current_timezone(new_time)
 
 
 class HayUserForm(ModelForm):
