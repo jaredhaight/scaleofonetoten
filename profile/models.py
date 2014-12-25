@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
+
 NOTIFICATION_CHOICES = (
-    ("EMAIL", "email"),
-    ("TEXT", "text")
+    ("EMAIL", "Email"),
+    ("TEXT", "Text")
 )
 
 DAY_CHOICES = (
@@ -15,6 +16,17 @@ DAY_CHOICES = (
     ("THURSDAY", "Thursday"),
     ("FRIDAY", "Friday"),
     ("SATURDAY", "Saturday")
+)
+
+TIMEZONE_CHOICES = (
+    ('US/Alaska', "Alaska"),
+    ('US/Arizona', "Arizona"),
+    ('US/Central', "Central"),
+    ('US/Eastern', "Eastern"),
+    ('US/Hawaii', "Hawaii"),
+    ("US/Indiana-Starke", "Indiana-Starke"),
+    ('US/Mountain', "Mountain"),
+    ('US/Pacific', "Pacific")
 )
 
 
@@ -52,6 +64,7 @@ class HayUser(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(null=True, max_length=12)
     phone_verified = models.BooleanField(editable=False, default=False)
     email_verified = models.BooleanField(editable=False, default=False)
+    timezone = models.CharField(default="US/Eastern", choices=TIMEZONE_CHOICES, max_length=24)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -76,7 +89,7 @@ class HayUser(AbstractBaseUser, PermissionsMixin):
 class Notification(models.Model):
     type = models.CharField(max_length=10, choices=NOTIFICATION_CHOICES, default="text")
     #day_to_send = models.CharField(max_length=7, choices=DAY_CHOICES)
-    time_to_send = models.TimeField()
+    time_to_send = models.DateTimeField(null=True)
     user = models.ForeignKey(HayUser)
 
     def create_notification(self, type, days, time):

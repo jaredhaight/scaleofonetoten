@@ -34,6 +34,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
+    'localflavor',
     'onetoten',
     'dashboard',
     'profile'
@@ -47,6 +49,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'onetoten.middleware.TimezoneMiddleware'
 )
 
 TEMPLATE_DIRS = (
