@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response, HttpResponse, RequestContext
 from django.contrib.auth.decorators import login_required
 from dashboard.models import Result
 
@@ -12,5 +12,7 @@ def home(request):
     for r in results:
         result_list.append(r.value)
         date_list.append(r.time.strftime("%x"))
-    return render_to_response('dashboard_home.html', dict(date_list=date_list, result_list=result_list))
+    d = dict(date_list=date_list, result_list=result_list, results=results)
+    return render_to_response('dashboard_home.html', d,
+                              context_instance=RequestContext(request))
 

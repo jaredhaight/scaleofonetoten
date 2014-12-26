@@ -3,11 +3,11 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
-    return render_to_response('home.html')
+    return render_to_response('home.html', context_instance=RequestContext(request))
 
 
 def register(request):
-    return render_to_response('register.html')
+    return render_to_response('register.html', context_instance=RequestContext(request))
 
 
 def login_view(request):
