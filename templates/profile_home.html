@@ -9,6 +9,16 @@
     <p>{{ result }}</p>
   </div>
 {% endif %}
+{% if not user.email_verified %}
+    <div class="alert alert-danger" role="alert">
+      <p>You have not verified your email address! We can not send you emails until you do that. Click <a href="">here</a> fix this.</p>
+  </div>
+{% endif %}
+{% if not user.phone_verified %}
+    <div class="alert alert-danger" role="alert">
+      <p>You have not verified your phone number! We can not send you text messages until you do that. Click <a href="">here</a> to fix this.</p>
+  </div>
+{% endif %}
 {% if user_form.non_field_errors %}
   {{ user_form.non_field_errors }}
 {% endif %}
