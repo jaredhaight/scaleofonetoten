@@ -1,8 +1,6 @@
 from twilio.rest import TwilioRestClient
-
-account = "AC62a425b1f396f890f96bed5b598ee62f"
-token = "5245080b76da4d1e818a770ba4479a67"
-client = TwilioRestClient(account, token)
+from onetoten.local_settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
+client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 from_number = "19802014736"
 
 
