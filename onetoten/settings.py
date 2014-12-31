@@ -37,8 +37,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'localflavor',
     'onetoten',
-    'dashboard',
-    'profile'
+    'account'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -97,7 +96,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = "profile.HayUser"
+AUTH_USER_MODEL = "account.OTTUser"
 LOGIN_URL = '/login/'
 try:
     from local_settings import *

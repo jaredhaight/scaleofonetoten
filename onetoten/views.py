@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response, RequestContext, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -6,7 +7,7 @@ def home(request):
     return render_to_response('home.html', context_instance=RequestContext(request))
 
 
-def register(request):
+def register_view(request):
     return render_to_response('register.html', context_instance=RequestContext(request))
 
 
@@ -32,7 +33,7 @@ def login_view(request):
                 login(request, user)
                 if next_value:
                     return HttpResponseRedirect(next_value)
-                return HttpResponseRedirect('/profile/')
+                return HttpResponseRedirect(reverse('account.views.profile_view'))
     d = dict(next_value=next_value)
     return render_to_response('login.html', d, context_instance=RequestContext(request))
 

@@ -6,7 +6,7 @@ from django.forms.util import to_current_timezone
 from django.utils import timezone
 import pytz
 import datetime
-from profile.models import HayUser, Notification, NOTIFICATION_CHOICES
+from account.models import OTTUser, Notification, NOTIFICATION_CHOICES
 
 
 class TzAwareTimeField(fields.TimeField):
@@ -30,7 +30,7 @@ class TzAwareTimeField(fields.TimeField):
 class HayUserForm(ModelForm):
     phone_number = USPhoneNumberField(required=False)
     class Meta:
-        model = HayUser
+        model = OTTUser
         fields = ['email', 'phone_number', 'timezone']
 
 

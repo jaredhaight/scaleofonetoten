@@ -2,9 +2,7 @@ from django.http import HttpResponse
 
 from django_twilio.decorators import twilio_view
 from twilio.twiml import Response
-
-from dashboard.models import Result
-from profile.models import HayUser
+from account.models import OTTUser, Result
 
 @twilio_view
 def sms(request):
@@ -12,7 +10,7 @@ def sms(request):
     from_number = request.POST["From"]
     body = request.POST["Body"]
     try:
-        user = HayUser.objects.filter(phone_number=from_number[2:]).first()
+        user = OTTUser.objects.filter(phone_number=from_number[2:]).first()
     except:
         user = None
 
