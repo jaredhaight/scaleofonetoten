@@ -9,7 +9,7 @@ def sms(request):
     resp = Response()
     from_number = request.POST["From"]
     body = request.POST["Body"]
-    log_message("Got from number: " + from_number[:10])
+    log_message("Got from number: " + from_number)
     try:
         user = OTTUser.objects.filter(phone_number=from_number[:10]).first()
     except:
