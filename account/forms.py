@@ -1,4 +1,3 @@
-from localflavor.us.forms import USPhoneNumberField
 from django.forms import fields
 from django.forms import ModelForm, ChoiceField
 from django.forms.util import from_current_timezone
@@ -27,8 +26,7 @@ class TzAwareTimeField(fields.TimeField):
         return from_current_timezone(new_time)
 
 
-class HayUserForm(ModelForm):
-    phone_number = USPhoneNumberField(required=False)
+class OTTUserForm(ModelForm):
     class Meta:
         model = OTTUser
         fields = ['email', 'phone_number', 'timezone']

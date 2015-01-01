@@ -1,19 +1,19 @@
 from django.shortcuts import render_to_response, RequestContext
 from django.contrib.auth.decorators import login_required
 from account.models import Notification, Result
-from account.forms import HayUserForm, NotificationForm
+from account.forms import OTTUserForm, NotificationForm
 
 
 @login_required()
 def profile_view(request):
     user = request.user
     notification = Notification.objects.filter(user=user).first()
-    user_form = HayUserForm(instance=user, prefix="u_")
+    user_form = OTTUserForm(instance=user, prefix="u_")
     #TODO - If a notification doesn't exist already, this bombs out. I should fix that.
     notification_form = NotificationForm(instance=notification, prefix="n_")
     result = None
     if request.POST:
-        user_form = HayUserForm(request.POST, prefix="u_", instance=user)
+        user_form = OTTUserForm(request.POST, prefix="u_", instance=user)
         notification_form = NotificationForm(request.POST, prefix="n_", instance=notification)
         if user_form.is_valid() and notification_form.is_valid():
             user_form.save()
