@@ -9,6 +9,7 @@ def profile_view(request):
     user = request.user
     notification = Notification.objects.filter(user=user).first()
     user_form = HayUserForm(instance=user, prefix="u_")
+    #TODO - If a notification doesn't exist already, this bombs out. I should fix that.
     notification_form = NotificationForm(instance=notification, prefix="n_")
     result = None
     if request.POST:

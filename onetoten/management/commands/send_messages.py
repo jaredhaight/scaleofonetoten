@@ -1,12 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from account.models import Notification
 import datetime
-from onetoten.utils import send_text
-
-
-def log_message(message):
-    with open("/tmp/sendmessages_log", "a") as logfile:
-        logfile.write(datetime.datetime.now().isoformat()+" - " + message + "\n")
+from onetoten.utils import send_text, log_message
 
 
 class Command(BaseCommand):

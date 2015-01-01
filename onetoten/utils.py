@@ -7,3 +7,8 @@ from_number = "19802014736"
 def send_text(to_number, message_content):
     result = client.messages.create(to=to_number, from_=from_number, body=message_content)
     return result
+
+
+def log_message(message):
+    with open("/tmp/scaleofonetoten.log", "a") as logfile:
+        logfile.write(datetime.datetime.now().isoformat()+" - " + message + "\n")
